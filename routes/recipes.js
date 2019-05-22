@@ -21,8 +21,6 @@ router.get('/recipes', (req, res, next) => {
 
 router.post('/add', (req, res) => {
   
-
-
   const {creator, name, description, images, tags, comments, yield, ingredients, methods} = req.body; // 1st-level destructuring
   const {diet, type, cuisine, mainIngredients} = tags;
   const {commentcreator, text}= comments;
@@ -49,6 +47,30 @@ router.post('/add', (req, res) => {
     })
     
 })
+
+
+// GET route => to get a specific recipe (from overview)
+router.get('/recipes/:id', (req, res) => {
+  const {id} = req.params // desctricture params
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    res
+      .status(400)
+      .json({message: 'Invalid ID'})
+  }  // basic check so database canÄt eb overloaded
+ 
+ 
+  Recipe.findById( id ).populate('user')
+    .then(foundRecipes => {
+      res.json(foundRecipes);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json(err)
+    })
+});
+
 
 
 module.exports = router;
