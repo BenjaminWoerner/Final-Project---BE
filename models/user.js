@@ -3,12 +3,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
+  email: String,
   password: String,
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  },
+  recipes: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
+  favorites: [{type: Schema.Types.ObjectId, ref: 'Recipe'}]
 });
 
 const User = mongoose.model('User', userSchema);
