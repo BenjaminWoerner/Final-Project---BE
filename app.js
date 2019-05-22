@@ -11,6 +11,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const auth = require('./routes/auth');
+const recipes = require('./routes/recipes');
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -56,6 +57,7 @@ app.use(
   }),
 );
 
+// MIDDLEWARE SETUP
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -63,6 +65,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
+app.use('/api', recipes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

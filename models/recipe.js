@@ -6,20 +6,20 @@ const recipeSchema = new Schema({
  name: String,
  description: String,
  images: [],
- tags: [{
+ tags: {
   diet: {type: String, enum: ['Keto', 'Low-Carb', 'High-Protein', 'Vegan', 'Vegetarian']},
   component: String,
   type: String,
   cuisine: String,
-  mainIngredient: []
-  }],
+  mainIngredients: []
+  },
  comments: [{
-  creator: {type: Schema.Types.ObjectId, ref: 'User'},
+  commentcreator: {type: Schema.Types.ObjectId, ref: 'User'},
   text: String,
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
+ // timestamps: {
+  //  createdAt: 'created_at',
+ //   updatedAt: 'updated_at'
+ // }
   }],
 yield: {
     quantityPrimary: Number,
@@ -28,18 +28,18 @@ yield: {
     unitSecondary: String
     },
 ingredients: [{
-  name: String,
+  ingredientname: String,
   quantity: Number,
   unit: String,
   prep: String,
   comment: String,
   category: {type: String, enum: ['Veg', 'Meat', 'Poultry', 'Fish', 'Pantry']},
    }],
-method: [],
-timestamps: {
-  createdAt: 'created_at',
-  updatedAt: 'updated_at'
-}
+methods: [],
+// timestamps: {
+ // createdAt: 'created_at',
+ // updatedAt: 'updated_at'
+//}
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
