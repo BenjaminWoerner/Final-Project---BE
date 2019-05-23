@@ -2,6 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
+  name: String,
+  description: String,
+  image: String,
+  ingredients: String,
+  methods: String,
+ })
+
+
+
+const Recipe = mongoose.model('Recipe', recipeSchema);
+
+module.exports = Recipe;
+
+
+/* const recipeSchema = new Schema({
  creator: {type: Schema.Types.ObjectId, ref: 'User'},
  name: String,
  description: String,
@@ -40,8 +55,5 @@ methods: [],
  // createdAt: 'created_at',
  // updatedAt: 'updated_at'
 //}
-});
+}); */
 
-const Recipe = mongoose.model('Recipe', recipeSchema);
-
-module.exports = Recipe;
